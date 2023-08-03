@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 //The useState() is a Hook that allows you to have state variables in functional components
+
 export default function TextForm(props) {
   //handing click event to convert the text into upper case using following function
   const handleUpClick = () => {
     let newText = text.toUpperCase(); //using toUpperCase() we are converting our text into upper case and storing the text in newText variable
     setText(newText); //here we are passing the newText value to setText state
+    props.showAlert("Converted to upper case","success");
   };
 
   //converting text into lower case
@@ -12,11 +14,13 @@ export default function TextForm(props) {
     // console.log("lowercase was clicked" + text);
     let newText = text.toLowerCase(); //using toUpperCase() we are converting our text into upper case and storing the text in newText variable
     setText(newText); //here we are passing the newText value to setText state
+    props.showAlert("Converted to lower case","success");
   };
   //clearing text
   const handleClearClick = () => {
     let newText = "";
     setText(newText);
+    props.showAlert("Text has been cleared","success");
   };
   //converting text to capitalization - Hi I Am Apeksha
   const handleCapitalizeClick = () => {
@@ -25,12 +29,14 @@ export default function TextForm(props) {
       .map((w) => w[0].toUpperCase() + w.substring(1).toLowerCase())
       .join(" ");
     setText(newText);
+    props.showAlert("Converted to Capitalize form","success");
   };
   //converting text to sentence check - Hi i am apeksha
   const handleSentenceClick = () => {
     let newText =
       text.charAt(0).toUpperCase() + text.substring(1).toLowerCase();
     setText(newText);
+    props.showAlert("Converted to Sentence form","success");
   };
 
   const CamelCaseConverter = () => {
@@ -47,6 +53,7 @@ export default function TextForm(props) {
     let camelCaseWord = camelCaseWords.join("");
     // this.useState({camelCaseWord});
     setText(camelCaseWord);
+    props.showAlert("Converted to camel case","success");
   };
 
   //converting text to snake case
@@ -59,6 +66,7 @@ export default function TextForm(props) {
     let finalSnakeCaseWord = snakeCaseWord.replace(/([a-z])([A-Z])/g, "$1_$2");
     // Convert the result to lowercase
     setText(finalSnakeCaseWord.toLowerCase());
+    props.showAlert("Converted to snake case","success");
   };
 
   //converting text to pascal
@@ -73,17 +81,20 @@ export default function TextForm(props) {
     const pascalCaseWord = capitalizedParts.join("");
 
     setText(pascalCaseWord);
+    props.showAlert("Converted to pascal case","success");
   };
 
   const handleCopy = () => {
     let text = document.getElementById("myBox");
     text.select(); //selecting all text
     navigator.clipboard.writeText(text.value); //by using navigator we have copied the whole text taking value
+    props.showAlert("Selected text has been copied","success");
   };
 
   const handleExtraSpace = () => {
     let newText = text.split(/[ ]+/);
     setText(newText.join(" "));
+    props.showAlert("Extra space has been cleared","success");
   };
 
   //using below function we are changeibg the event of button here the button will handle
